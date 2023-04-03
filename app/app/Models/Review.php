@@ -15,6 +15,9 @@ class Review extends Model
         'description',
         'rating'
     ];
+    protected $casts = [
+        'rating' => 'integer',
+    ];
 
     public function user()
     {
