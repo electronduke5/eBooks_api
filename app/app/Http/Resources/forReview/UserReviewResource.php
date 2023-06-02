@@ -29,6 +29,7 @@ class UserReviewResource extends JsonResource
             'patronymic' => $this->patronymic,
             'email' => $this->email,
             'username'=> $this->username,
+            'wallet' => $this->wallet,
         ];
     }
 }

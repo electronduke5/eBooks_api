@@ -136,6 +136,7 @@ class AuthController extends Controller
 
         $data = $request->validated();
         $data['password'] = Hash::make($request['password']);
+        $data['wallet'] = 150;
         $created_user = User::create($data);
         $created_user->sendEmailVerificationNotification();
         return [

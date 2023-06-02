@@ -20,9 +20,10 @@ class BookRequest extends FormRequest
         return [
             'title' => 'required|max:255',
             'year_of_issue' => 'required|max_digits:4|numeric|starts_with:1,2',
-            'image' => 'sometimes|nullable|image|mimes:jpg,png,jpeg,gif|max:2048',
+            'image' => 'sometimes|nullable|image|mimes:jpg,png,jpeg,gif',
             'file' => 'sometimes|nullable|file|mimes:epub,fb2',
             'rating' => 'sometimes|nullable',
+            'user_id' => 'sometimes|nullable|exists:users,id'
         ];
     }
 }

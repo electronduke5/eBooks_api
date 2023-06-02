@@ -116,7 +116,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
                                                           (9,	'2023_03_17_182415_create_bookmarks_table',	1),
                                                           (10,	'2023_03_17_182510_create_quotes_table',	1),
                                                           (11,	'2023_03_17_182640_create_moderators_table',	1),
-                                                          (12,	'2023_03_20_182816_remove_user_password',	2);
+                                                          (12,	'2023_03_20_182816_remove_user_password',	2),
+                                                          (13, '2023_04_10_151841_update_user_table', 3);
 
 DROP TABLE IF EXISTS `moderators`;
 CREATE TABLE `moderators` (
@@ -244,6 +245,7 @@ CREATE TABLE `users` (
                          `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
                          `email_verified_at` timestamp NULL DEFAULT NULL,
                          `is_verified` tinyint(1) NOT NULL DEFAULT '0',
+                         `is_admin` tinyint(1) NOT NULL DEFAULT '0',
                          `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
                          `created_at` timestamp NULL DEFAULT NULL,
                          `updated_at` timestamp NULL DEFAULT NULL,
@@ -252,8 +254,8 @@ CREATE TABLE `users` (
                          UNIQUE KEY `users_email_unique` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `users` (`id`, `surname`, `name`, `patronymic`, `username`, `email`, `email_verified_at`, `is_verified`, `remember_token`, `created_at`, `updated_at`) VALUES
-                                                                                                                                                                       (19,	'Гришин',	'Павел',	NULL,	'pav5',	'isip_p.s.grishin@mpt.ru',	'2023-03-19 03:53:53',	0,	'26|dOeffSVl5Q8sMQxMqy27iXuoKspFOKGWZhQ2smMB',	'2023-03-19 03:51:05',	'2023-03-26 17:25:22'),
-                                                                                                                                                                       (20,	'Иванов',	'Иван',	'Иванович',	'electronduke',	'g.pav5@mail.ru',	NULL,	0,	NULL,	'2023-03-25 18:45:45',	'2023-03-25 18:45:45');
-
+INSERT INTO `users` (`id`, `surname`, `name`, `patronymic`, `username`, `email`, `email_verified_at`, `is_verified`, `is_admin`, `remember_token`, `created_at`, `updated_at`) VALUES
+                                                                                                                                                                       (19,	'Гришин',	'Павел',	NULL,	'pav5',	'isip_p.s.grishin@mpt.ru',	'2023-03-19 03:53:53',	0,0,	'26|dOeffSVl5Q8sMQxMqy27iXuoKspFOKGWZhQ2smMB',	'2023-03-19 03:51:05',	'2023-03-26 17:25:22'),
+                                                                                                                                                                       (20,	'Иванов',	'Иван',	'Иванович',	'electronduke',	'g.pav5@mail.ru',	NULL,	0, 0,	NULL,	'2023-03-25 18:45:45',	'2023-03-25 18:45:45');
+    
 -- 2023-04-03 19:04:06

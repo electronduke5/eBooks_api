@@ -20,7 +20,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'patronymic',
         'username',
         'email',
-        'remember_token'
+        'remember_token',
+        'role_id',
+        'wallet',
     ];
 
     protected $hidden = [
@@ -38,9 +40,35 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Review::class, 'user_id');
     }
 
+
+    public function follower()
+    {
+        return $this->belongsToMany(User::class, 'subscribers', 'author_id', 'user_id');
+    }
+
+    public function subscriptions()
+    {
+        return $this->belongsToMany(User::class, 'subscribers', 'user_id', 'author_id');
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
     public function bookmarks()
     {
         return $this->belongsToMany(Book::class, 'bookmarks', 'user_id', 'book_id');
+    }
+
+    public function purchased_books()
+    {
+        return $this->belongsToMany(Book::class, 'books_users', 'user_id', 'book_id');
+    }
+
+    public function created_books()
+    {
+        return $this->hasMany(Book::class, 'user_id');
     }
 
     public function shelves()
@@ -51,5 +79,9 @@ class User extends Authenticatable implements MustVerifyEmail
     public function quotes()
     {
         return $this->hasMany(Quote::class, 'user_id');
+    }
+    public function posts()
+    {
+        return $this->hasMany(Post::class, 'user_id');
     }
 }

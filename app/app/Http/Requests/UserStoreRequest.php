@@ -15,6 +15,13 @@ class UserStoreRequest extends FormRequest
         return true;
     }
 
+//    protected function prepareForValidation()
+//    {
+//        $this->merge([
+//            'is_admin' => $this->is_admin ?? false,
+//        ]);
+//    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -28,6 +35,8 @@ class UserStoreRequest extends FormRequest
             'patronymic' => 'nullable|max:50|alpha',
             'username' => 'required|max:20|unique:users',
             'email' => 'required|email:rfc,dns|unique:users',
+            'role_id' => 'required|exists:roles,id',
+            'wallet' => 'nullable|double',
         ];
     }
 }
