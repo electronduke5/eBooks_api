@@ -19,6 +19,7 @@ class Book extends Model
         'image',
         'file',
         'rating',
+        'user_id',
     ];
 
     protected $hidden = [
@@ -45,4 +46,15 @@ class Book extends Model
     {
         return $this->hasMany(Review::class, 'book_id');
     }
+
+    public function owners()
+    {
+        return $this->belongsToMany(User::class, 'books_users', 'book_id', 'user_id');
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
 }
+

@@ -2,7 +2,9 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Controllers\BookController;
 use App\Http\Resources\forBook\AuthorBookResource;
+use App\Http\Resources\forReview\UserReviewResource;
 use App\Models\Author;
 use App\Models\Book;
 use Illuminate\Http\Request;
@@ -18,6 +20,8 @@ use Illuminate\Support\Facades\Storage;
  * @property mixed $file
  * @property mixed $rating
  * @property mixed $reviews
+ * @property mixed $books
+ * @property mixed $creator
  */
 class BookResource extends JsonResource
 {
@@ -32,6 +36,7 @@ class BookResource extends JsonResource
             'authors' => $this->authors,
             'rating' => round($this->rating, 2),
             'reviews' => ReviewResource::collection($this->reviews),
+            'creator' => new UserReviewResource($this->creator)
         ];
     }
 }

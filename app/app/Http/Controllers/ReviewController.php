@@ -6,6 +6,7 @@ use App\Http\Requests\ReviewRequest;
 use App\Http\Resources\ReviewResource;
 use App\Models\Book;
 use App\Models\Review;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -37,6 +38,10 @@ class ReviewController extends Controller
         }
         //обновления рейтинга книги
         Book::all()->firstWhere('id', $book_id)->update(array('rating' => round($average, 2)));
+
+        //Добавление монет пользователю за отзыв
+        $user = User::all()->find($request->user_id);
+        $user->update(array('wallet'=> $user->wallet + 50));
         return new ReviewResource($created_review);
     }
 

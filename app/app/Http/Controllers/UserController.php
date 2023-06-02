@@ -42,12 +42,20 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
+    public function addMoney(User $user)
+    {
+        $user->update(array('wallet'=> $user->wallet + 50));
+        return new UserResource($user);
+    }
+
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserUpdateRequest $request, User $user) : UserResource
+    public function update(UserUpdateRequest $request, User $user): UserResource
     {
-        $data = array_filter($request->validated());
+        $data = array_filter($request->validated(), function ($value) {
+            return ($value !== null && $value !== '');
+        });
         $user->update($data);
         return new UserResource($user);
     }

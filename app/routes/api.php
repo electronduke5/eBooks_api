@@ -1,16 +1,18 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\BookmarkController;
-use App\Http\Controllers\BookshelfController;
-use App\Http\Controllers\EmailVerificationController;
-use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
-use App\Http\Controllers\ShelfController;
+use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\BookshelfController;
+use App\Http\Controllers\BooksUsersController;
+use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\ModeratorController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\ShelfController;
+use App\Http\Controllers\SubscribeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -54,6 +56,13 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
         'bookmarks' => BookmarkController::class,
         'bookmarks/{$id}' => BookmarkController::class,
+
+        'booksUsers' => BooksUsersController::class,
+
+        'subscribe' => SubscribeController::class,
+
+        'posts' => PostController::class,
+        'posts/{$id}' => PostController::class,
 
     ]);
 });
